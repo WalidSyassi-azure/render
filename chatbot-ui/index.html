@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat with RAG AI</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    #chat { max-height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; }
+    .user { color: blue; }
+    .bot { color: green; }
+  </style>
+</head>
+<body>
+  <h2>🧠 Chat with AI</h2>
+  <div id="chat"></div>
+  <input id="question" type="text" placeholder="Ask a question..." size="50">
+  <button onclick="sendQuestion()">Send</button>
+
+  <script>
+    const chatBox = document.getElementById("chat");
+
+    async function sendQuestion() {
+      const question = document.getElementById("question").value;
+      if (!question.trim()) return;
+
+      chatBox.innerHTML += `<div class="user"><b>You:</b> ${question}</div>`;
+      document.getElementById("question").value = "";
+
+      const response = await fetch("https://render-4lb3.onrender.com/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question })
+      });
+
+      const data = await response.json();
+      chatBox.innerHTML += `<div class="bot"><b>AI:</b> ${data.answer}</div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+</body>
+</html>
