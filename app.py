@@ -7,11 +7,18 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.chains import RetrievalQA
 from langchain_openai import OpenAIEmbeddings, OpenAI
 from langchain_core.documents import Document
-
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()  # Load .env if present locally
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # OR use ["https://render-front-n7j5.onrender.com"] for security
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # --- Setup embedding and FAISS index ---
 texts = [
