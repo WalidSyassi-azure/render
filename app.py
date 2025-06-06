@@ -1,13 +1,13 @@
 import os
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from pydantic import BaseModel
-from langchain_community.embeddings import OpenAIEmbeddings
+from dotenv import load_dotenv
 from langchain_community.vectorstores import FAISS
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.chains import RetrievalQA
-from langchain.llms import OpenAI
-from langchain.docstore.document import Document
-from dotenv import load_dotenv
+from langchain_openai import OpenAIEmbeddings, OpenAI
+from langchain_core.documents import Document
+
 
 load_dotenv()  # Load .env if present locally
 
