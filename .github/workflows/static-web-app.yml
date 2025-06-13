@@ -1,0 +1,23 @@
+name: Azure Static Web Apps CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    name: Build and Deploy Static Web App
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Upload to Azure Static Web App
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Auto-generated GitHub token
+          action: "upload"
+          app_location: "/" # root folder for index.html
+          output_location: "" # no build step needed
