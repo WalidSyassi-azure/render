@@ -51,5 +51,9 @@ class Query(BaseModel):
 
 @app.post("/ask")
 async def ask_question(query: Query):
-    answer = qa_chain.invoke(query.question)
-    return {"question": query.question, "answer": answer}
+    result = qa_chain.invoke({"query": query.question})  # fix input
+    return {
+        "question": query.question,
+        "answer": result.get("result", result)  # extract the actual string
+    }
+
