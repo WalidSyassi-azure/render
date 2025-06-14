@@ -51,5 +51,5 @@ class Query(BaseModel):
 
 @app.post("/ask")
 async def ask_question(query: Query):
-    answer = qa_chain.run(query.question)
+    answer = qa_chain.invoke(query.question)
     return {"question": query.question, "answer": answer}
