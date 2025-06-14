@@ -14,7 +14,7 @@ load_dotenv()  # Load .env if present locally
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # OR use ["https://render-front-n7j5.onrender.com"] for security
+    allow_origins=["https://gray-mud-0ceefc21e.6.azurestaticapps.net"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
